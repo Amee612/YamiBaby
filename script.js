@@ -81,45 +81,246 @@ confettiBtn.addEventListener('click', () => {
     }, 250);
 });
 
-// Dynamic Image Uploader Logic for Gallery
+// Dynamic Image Carousel Engine
+const polaroidCarousel = document.getElementById('polaroid-carousel');
+const carouselIndicators = document.getElementById('carousel-indicators');
+const btnPrev = document.getElementById('carousel-prev');
+const btnNext = document.getElementById('carousel-next');
 const imageUploader = document.getElementById('image-uploader');
-const polaroidGallery = document.getElementById('polaroid-gallery');
 
+// Captions for uploaded photos
 const cuteCaptions = [
     "Precious Moment", "Sweet Angel", "Little Princess", 
-    "So Cute!", "Beautiful Smile", "Our World 💖"
+    "So Cute!", "Beautiful Smile", "Our World 💖", "My Joy ✨", "Pure Happiness"
 ];
 
-if (imageUploader && polaroidGallery) {
+// Pre-defined array of Yami's pictures from the assets folder
+const yamiImages = [
+    { src: "assets/Yami/WhatsApp Image 2026-07-08 at 1.14.30 AM.jpeg", caption: "Sweet Angel 💖" },
+    { src: "assets/Yami/8 month.JPG.jpeg", caption: "8 Months Old 🧸" },
+    { src: "assets/Yami/10 MONTH.JPG.jpeg", caption: "10 Months Old 🌸" },
+    { src: "assets/Yami/ABC_2068.JPG.jpeg", caption: "So Much Joy ✨" },
+    { src: "assets/Yami/ABC_2134.JPG.jpeg", caption: "Giggly Princess 👑" },
+    { src: "assets/Yami/ABC_2871.JPG.jpeg", caption: "Charming Eyes ⭐" },
+    { src: "assets/Yami/ABC_2914.JPG.jpeg", caption: "Sweetest Gaze 🦋" },
+    { src: "assets/Yami/ABC_2959.JPG.jpeg", caption: "Bright Smiles 😊" },
+    { src: "assets/Yami/ABC_4435.JPG.jpeg", caption: "Playtime Fun 🎈" },
+    { src: "assets/Yami/ABC_8067.JPG.jpeg", caption: "Little Explorer 🌟" },
+    { src: "assets/Yami/ABC_8112.JPG.jpeg", caption: "Lovely Moments 💕" },
+    { src: "assets/Yami/ABC_8148.JPG.jpeg", caption: "Our Little Treasure 💎" },
+    { src: "assets/Yami/ABC_8172.JPG.jpeg", caption: "Tiny Miracle 🕊️" },
+    { src: "assets/Yami/ABC_8174.JPG.jpeg", caption: "Happy Heart ❤️" },
+    { src: "assets/Yami/ABC_8890.JPG.jpeg", caption: "Cuddly & Cute 🧸" },
+    { src: "assets/Yami/ABC_8960.JPG.jpeg", caption: "Cheeky Smile 😜" },
+    { src: "assets/Yami/ABC_8991.JPG.jpeg", caption: "Beautiful Angel 😇" },
+    { src: "assets/Yami/IMG_0762.JPG.jpeg", caption: "Pure Magic ✨" },
+    { src: "assets/Yami/IMG_0791.JPG.jpeg", caption: "Sunshine Girl ☀️" },
+    { src: "assets/Yami/IMG_0803.JPG.jpeg", caption: "Sweet Dreams 🌙" },
+    { src: "assets/Yami/IMG_0815.JPG.jpeg", caption: "Masi's Princess 💖" }
+];
+
+let currentIndex = 0;
+let autoPlayInterval;
+
+function renderCarousel() {
+    if (!polaroidCarousel || !carouselIndicators) return;
+    
+    polaroidCarousel.innerHTML = '';
+    carouselIndicators.innerHTML = '';
+    
+    yamiImages.forEach((imgData, index) => {
+        // Create slide container
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        
+        // Add click listener so clicking side cards moves to them
+        slide.addEventListener('click', () => {
+            if (slide.classList.contains('prev-card')) {
+                prevSlide();
+                resetAutoPlay();
+            } else if (slide.classList.contains('next-card')) {
+                nextSlide();
+                resetAutoPlay();
+            }
+        });
+        
+        // Create polaroid card
+        const polaroid = document.createElement('div');
+        polaroid.className = 'polaroid';
+        
+        // Image element
+        const img = document.createElement('img');
+        img.src = imgData.src;
+        img.alt = imgData.caption;
+        img.onerror = function() {
+            // High quality child/baby portrait default if image fails to load
+            this.src = 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=400&q=80';
+        };
+        
+        // Caption element
+        const caption = document.createElement('div');
+        caption.className = 'caption';
+        caption.innerText = imgData.caption;
+        
+        polaroid.appendChild(img);
+        polaroid.appendChild(caption);
+        slide.appendChild(polaroid);
+        polaroidCarousel.appendChild(slide);
+        
+        // Create indicator dot
+        const dot = document.createElement('div');
+        dot.className = 'indicator-dot';
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+            resetAutoPlay();
+        });
+        carouselIndicators.appendChild(dot);
+    });
+    
+    updateCarouselPosition();
+}
+
+function updateCarouselPosition() {
+    if (!polaroidCarousel) return;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.indicator-dot');
+    const len = yamiImages.length;
+    
+    slides.forEach((slide, index) => {
+        // Clear all state classes
+        slide.classList.remove('active-card', 'prev-card', 'next-card');
+        
+        // Set new state classes for 3D layout
+        if (index === currentIndex) {
+            slide.classList.add('active-card');
+        } else if (index === (currentIndex - 1 + len) % len) {
+            slide.classList.add('prev-card');
+        } else if (index === (currentIndex + 1) % len) {
+            slide.classList.add('next-card');
+        }
+    });
+    
+    dots.forEach((dot, index) => {
+        if (index === currentIndex) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+function nextSlide() {
+    if (yamiImages.length === 0) return;
+    currentIndex = (currentIndex + 1) % yamiImages.length;
+    updateCarouselPosition();
+}
+
+function prevSlide() {
+    if (yamiImages.length === 0) return;
+    currentIndex = (currentIndex - 1 + yamiImages.length) % yamiImages.length;
+    updateCarouselPosition();
+}
+
+function goToSlide(index) {
+    currentIndex = index;
+    updateCarouselPosition();
+}
+
+function startAutoPlay() {
+    autoPlayInterval = setInterval(nextSlide, 4500); // cycle every 4.5s
+}
+
+function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+}
+
+// Add event listeners to control buttons
+if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+        prevSlide();
+        resetAutoPlay();
+    });
+}
+
+if (btnNext) {
+    btnNext.addEventListener('click', () => {
+        nextSlide();
+        resetAutoPlay();
+    });
+}
+
+// Pause autoplay on mouse enter, resume on mouse leave
+const carouselContainer = document.querySelector('.carousel-container');
+if (carouselContainer) {
+    carouselContainer.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+    carouselContainer.addEventListener('mouseleave', () => {
+        startAutoPlay();
+    });
+}
+
+// Mobile touch swipe gestures
+let touchStartX = 0;
+let touchEndX = 0;
+const viewport = document.querySelector('.carousel-viewport');
+
+if (viewport) {
+    viewport.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    viewport.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+}
+
+function handleSwipe() {
+    const threshold = 50; // minimum distance in px
+    if (touchStartX - touchEndX > threshold) {
+        nextSlide();
+        resetAutoPlay();
+    } else if (touchEndX - touchStartX > threshold) {
+        prevSlide();
+        resetAutoPlay();
+    }
+}
+
+// Image Upload Integration with Carousel
+if (imageUploader) {
     imageUploader.addEventListener('change', function(event) {
         const files = event.target.files;
+        let addedAny = false;
         
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            
             if (!file.type.startsWith('image/')) continue;
             
             const reader = new FileReader();
-            
             reader.onload = function(e) {
-                const polaroid = document.createElement('div');
-                polaroid.className = 'polaroid';
+                const newImg = {
+                    src: e.target.result,
+                    caption: cuteCaptions[Math.floor(Math.random() * cuteCaptions.length)] + " 💖"
+                };
                 
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = 'Uploaded Memory';
+                // Add new photos at the beginning
+                yamiImages.unshift(newImg);
+                addedAny = true;
                 
-                const caption = document.createElement('div');
-                caption.className = 'caption';
-                caption.innerText = cuteCaptions[Math.floor(Math.random() * cuteCaptions.length)];
-                
-                polaroid.appendChild(img);
-                polaroid.appendChild(caption);
-                
-                polaroidGallery.insertBefore(polaroid, polaroidGallery.firstChild);
+                // Once loaded, re-render carousel and go to the first slide (which is the newly uploaded image)
+                currentIndex = 0;
+                renderCarousel();
+                resetAutoPlay();
             };
-            
             reader.readAsDataURL(file);
         }
     });
 }
+
+// Initialize the carousel on page load
+document.addEventListener('DOMContentLoaded', () => {
+    renderCarousel();
+    startAutoPlay();
+});

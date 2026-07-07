@@ -221,6 +221,34 @@ h1, h2, h3, .quote, .signature {
     color: #4a4a4a;
 }
 
+.message-content {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: center;
+}
+
+.message-content p {
+    font-size: 1.35rem;
+    line-height: 1.8;
+    color: #4b4b4b;
+}
+
+.love-note {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem !important;
+    color: #ff477e !important;
+    margin-top: 1rem;
+}
+
+.highlight-pink {
+    color: #ff477e;
+    font-size: 2.2rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
 .floating-teddy {
     position: absolute;
     width: 180px;
@@ -316,13 +344,146 @@ h1, h2, h3, .quote, .signature {
     background: rgba(255,255,255,0.25);
 }
 
-.polaroid-gallery {
+/* Carousel Container */
+.carousel-container {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    gap: 3rem;
-    max-width: 1100px;
+    position: relative;
+    max-width: 850px;
+    margin: 2rem auto;
+    gap: 1rem;
+}
+
+.carousel-viewport {
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.polaroid-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* 3D Coverflow states */
+.carousel-slide.active-card {
+    opacity: 1;
+    visibility: visible;
+    z-index: 5;
+    transform: translate(-50%, -50%) scale(1) rotate(-1.5deg);
+}
+
+.carousel-slide.prev-card {
+    opacity: 0.6;
+    visibility: visible;
+    z-index: 3;
+    transform: translate(calc(-50% - 190px), -50%) scale(0.8) rotate(-7deg);
+    cursor: pointer;
+}
+
+.carousel-slide.next-card {
+    opacity: 0.6;
+    visibility: visible;
+    z-index: 3;
+    transform: translate(calc(-50% + 190px), -50%) scale(0.8) rotate(7deg);
+    cursor: pointer;
+}
+
+/* Custom Polaroid inside Carousel */
+.carousel-slide .polaroid {
+    transform: none !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.18) !important;
+    margin: 0;
+    width: 360px; /* Big premium sizing */
+    padding: 18px 18px 55px 18px;
+}
+
+.carousel-slide .polaroid img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.carousel-slide.active-card .polaroid:hover {
+    transform: scale(1.04) rotate(0deg) !important;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.25) !important;
+}
+
+/* Control Buttons */
+.carousel-control {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dark);
+    font-size: 2.5rem;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.carousel-control:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(135, 107, 133, 0.25);
+    color: #ff6b81;
+}
+
+/* Indicators */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    max-width: 80%;
     margin: 0 auto;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 107, 129, 0.25);
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+    background: #ff6b81;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(255, 107, 129, 0.6);
 }
 
 .polaroid {
@@ -503,4 +664,29 @@ h1, h2, h3, .quote, .signature {
     .floating-teddy { width: 120px; bottom: -50px; right: -30px; }
     .polaroid img { width: 200px; height: 200px; }
     .moon { font-size: 3rem; right: 20px; }
+
+    /* Carousel Responsive Overrides */
+    .carousel-container {
+        gap: 0.5rem;
+        max-width: 320px;
+    }
+    .carousel-control {
+        width: 45px;
+        height: 45px;
+        font-size: 1.8rem;
+    }
+    .carousel-viewport {
+        padding: 10px 5px;
+    }
+    .carousel-slide .polaroid img {
+        width: 220px;
+        height: 220px;
+    }
+    .carousel-slide .polaroid {
+        padding: 10px 10px 35px 10px;
+    }
+    .carousel-slide .polaroid .caption {
+        font-size: 1.4rem;
+        bottom: 8px;
+    }
 }

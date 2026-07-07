@@ -37,10 +37,13 @@
 
     <section class="welcome" id="welcome">
         <div class="glass-card emotional-message">
-            <h2>Welcome to the World of Magic 🦋</h2>
-            <p>
-                My dearest little angel, from the moment you opened your eyes, you filled our lives with endless joy and magic. Watching you grow over this past year has been the greatest blessing. Your Masi loves you more than words can say. May your life be as beautiful, sweet, and magical as you are!
-            </p>
+            <h2>Happy 1st Birthday, our precious Yami! 🎉🎂💖</h2>
+            <div class="message-content">
+                <p>One whole year ago, on <strong>8th July 2025</strong>, you came into our lives and filled our hearts with endless joy. Today, on <strong>8th July 2026</strong>, we celebrate your very first birthday and the beautiful memories you've already created.</p>
+                <p>May your life always be filled with love, laughter, good health, and countless blessings. May every step you take bring happiness, and may your smile continue to brighten everyone's day.</p>
+                <p>Wishing you a magical first birthday, sweetheart. Here's to many more wonderful years ahead!</p>
+                <p class="love-note">With lots of love and hugs, ❤️<br><strong class="highlight-pink">Happy Birthday, Yami! 🎈🎁</strong></p>
+            </div>
             <img src="assets/waving_teddy.png" alt="Teddy Bear" class="floating-teddy">
         </div>
     </section>
@@ -116,19 +119,18 @@
             <input type="file" id="image-uploader" multiple accept="image/*" style="display: none;">
         </div>
 
-        <div class="polaroid-gallery" id="polaroid-gallery">
-            <div class="polaroid">
-                <img src="assets/hero_baby.png" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=400&q=80'">
-                <div class="caption">Sweet Angel</div>
+        <div class="carousel-container">
+            <button class="carousel-control prev" id="carousel-prev" aria-label="Previous image">‹</button>
+            <div class="carousel-viewport">
+                <div class="polaroid-carousel" id="polaroid-carousel">
+                    <!-- Polaroid cards will be dynamically injected by script.js -->
+                </div>
             </div>
-            <div class="polaroid">
-                <img src="assets/first_smile.png" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80'">
-                <div class="caption">Little Princess</div>
-            </div>
-            <div class="polaroid">
-                <img src="assets/gallery_1.png" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80'">
-                <div class="caption">Starry Eyes</div>
-            </div>
+            <button class="carousel-control next" id="carousel-next" aria-label="Next image">›</button>
+        </div>
+        
+        <div class="carousel-indicators" id="carousel-indicators">
+            <!-- Indicator dots will be dynamically injected by script.js -->
         </div>
     </section>
 
