@@ -152,8 +152,18 @@ h1, h2, h3, .quote, .signature {
 .main-title {
     font-size: 4.5rem;
     color: #ff477e;
-    text-shadow: 3px 3px 6px rgba(255,255,255,0.8);
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
     margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #ff477e 0%, #ff8da1 25%, #ffb84d 50%, #ff8da1 75%, #ff477e 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
 }
 
 .crown {
@@ -363,28 +373,31 @@ h1, h2, h3, .quote, .signature {
     display: flex;
     justify-content: center;
     align-items: center;
+    perspective: 1200px; /* Enable true 3D perspective */
 }
 
 .polaroid-carousel {
     position: relative;
     width: 100%;
     height: 100%;
+    transform-style: preserve-3d; /* Maintain 3D rendering context */
 }
 
 .carousel-slide {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.5);
+    transform: translate(-50%, -50%) scale(0.5) translateZ(-200px);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+    transform-style: preserve-3d;
 }
 
 /* 3D Coverflow states */
@@ -392,22 +405,22 @@ h1, h2, h3, .quote, .signature {
     opacity: 1;
     visibility: visible;
     z-index: 5;
-    transform: translate(-50%, -50%) scale(1) rotate(-1.5deg);
+    transform: translate(-50%, -50%) translateZ(80px) scale(1) rotate(-1.5deg);
 }
 
 .carousel-slide.prev-card {
-    opacity: 0.6;
+    opacity: 0.65;
     visibility: visible;
     z-index: 3;
-    transform: translate(calc(-50% - 240px), -50%) scale(0.8) rotate(-7deg);
+    transform: translate(calc(-50% - 250px), -50%) translateZ(-50px) scale(0.85) rotateY(40deg) rotateZ(-3deg);
     cursor: pointer;
 }
 
 .carousel-slide.next-card {
-    opacity: 0.6;
+    opacity: 0.65;
     visibility: visible;
     z-index: 3;
-    transform: translate(calc(-50% + 240px), -50%) scale(0.8) rotate(7deg);
+    transform: translate(calc(-50% + 250px), -50%) translateZ(-50px) scale(0.85) rotateY(-40deg) rotateZ(3deg);
     cursor: pointer;
 }
 
@@ -653,6 +666,27 @@ h1, h2, h3, .quote, .signature {
     100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 
+/* Sparkle Trail */
+.sparkle-trail {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 9999;
+    animation: sparkleFade 0.8s ease-out forwards;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+@keyframes sparkleFade {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .main-title { font-size: 3rem; }
@@ -667,26 +701,47 @@ h1, h2, h3, .quote, .signature {
 
     /* Carousel Responsive Overrides */
     .carousel-container {
-        gap: 0.5rem;
-        max-width: 320px;
+        gap: 0.2rem;
+        max-width: 100%;
+        margin: 1rem auto;
+    }
+    .carousel-viewport {
+        height: 380px;
     }
     .carousel-control {
         width: 45px;
         height: 45px;
         font-size: 1.8rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
     }
-    .carousel-viewport {
-        padding: 10px 5px;
+    .carousel-control.prev {
+        left: 5px;
     }
-    .carousel-slide .polaroid img {
-        width: 220px;
-        height: 220px;
+    .carousel-control.next {
+        right: 5px;
+    }
+    .carousel-slide.active-card {
+        transform: translate(-50%, -50%) translateZ(40px) scale(1) rotate(-1.5deg);
+    }
+    .carousel-slide.prev-card {
+        transform: translate(calc(-50% - 95px), -50%) translateZ(-40px) scale(0.72) rotateY(25deg) rotateZ(-2deg);
+        opacity: 0.45;
+    }
+    .carousel-slide.next-card {
+        transform: translate(calc(-50% + 95px), -50%) translateZ(-40px) scale(0.72) rotateY(-25deg) rotateZ(2deg);
+        opacity: 0.45;
     }
     .carousel-slide .polaroid {
-        padding: 10px 10px 35px 10px;
+        width: 240px;
+        padding: 10px 10px 38px 10px;
+    }
+    .carousel-slide .polaroid img {
+        height: 200px;
     }
     .carousel-slide .polaroid .caption {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         bottom: 8px;
     }
 }

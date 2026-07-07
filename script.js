@@ -324,3 +324,30 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCarousel();
     startAutoPlay();
 });
+
+// Magical Cursor Sparkle Trail
+document.addEventListener('mousemove', (e) => {
+    // Bounded throttle: only generate sparkles on 35% of moves to keep performance buttery smooth
+    if (Math.random() > 0.35) return;
+
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle-trail';
+    sparkle.style.left = `${e.pageX}px`;
+    sparkle.style.top = `${e.pageY}px`;
+
+    // Randomize dimensions
+    const size = Math.random() * 8 + 6;
+    sparkle.style.width = `${size}px`;
+    sparkle.style.height = `${size}px`;
+
+    // Random soft pastel theme colors
+    const colors = ['#ffd1dc', '#ffd700', '#fffdd0', '#b0e0e6', '#e6e6fa', '#ff9a9e'];
+    sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(sparkle);
+
+    // Clean up DOM element after fade animation completes
+    setTimeout(() => {
+        sparkle.remove();
+    }, 800);
+});
