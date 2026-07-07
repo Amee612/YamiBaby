@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 1st Birthday Princess 👑</title>
+    <meta name="description" content="A magical 1st birthday celebration for our little angel. Love, Masi.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Interactive background -->
+    <div id="particles-container"></div>
+
+    <div class="music-btn-container">
+        <button id="music-btn" class="glass-btn">
+            <span class="icon">🎵</span>
+            <span class="text">Play Magic</span>
+        </button>
+        <audio id="bg-music" loop>
+            <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=lullaby-103323.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="photo-frame-container">
+                <div class="photo-frame">
+                    <img src="assets/hero_baby.png" alt="Our Princess">
+                </div>
+            </div>
+            <h1 class="main-title">Happy 1st Birthday Princess <span class="crown">👑</span></h1>
+            <h2 class="sub-title">To My Sweet Little Angel — Love From Your Masi 💖</h2>
+            <a href="#welcome" class="cta-btn">See Your Magical Journey ✨</a>
+        </div>
+    </section>
+
+    <section class="welcome" id="welcome">
+        <div class="glass-card emotional-message">
+            <h2>Welcome to the World of Magic 🦋</h2>
+            <p>
+                My dearest little angel, from the moment you opened your eyes, you filled our lives with endless joy and magic. Watching you grow over this past year has been the greatest blessing. Your Masi loves you more than words can say. May your life be as beautiful, sweet, and magical as you are!
+            </p>
+            <img src="assets/waving_teddy.png" alt="Teddy Bear" class="floating-teddy">
+        </div>
+    </section>
+
+    <section class="timeline" id="timeline">
+        <h2 class="section-title">Your Magical Journey 🌟</h2>
+        <div class="timeline-grid">
+            <div class="milestone-card">
+                <div class="card-inner">
+                    <div class="card-front" style="background: var(--blush-pink)">
+                        <h3>First Smile 😊</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="assets/first_smile.png" alt="First Smile" onerror="this.src='https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=400&q=80'">
+                        <p>You melted our hearts!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="card-inner">
+                    <div class="card-front" style="background: var(--baby-blue)">
+                        <h3>First Step 👣</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="assets/gallery_1.png" alt="First Step" onerror="this.src='https://images.unsplash.com/photo-1542036069-b3a1653eb7ab?auto=format&fit=crop&w=400&q=80'">
+                        <p>One step closer to the stars!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="card-inner">
+                    <div class="card-front" style="background: var(--peach)">
+                        <h3>First Word 🗣️</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="assets/hero_baby.png" alt="First Word" onerror="this.src='https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80'">
+                        <p>The sweetest sound ever!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="card-inner">
+                    <div class="card-front" style="background: var(--lavender)">
+                        <h3>First Tooth 🦷</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="assets/first_smile.png" alt="First Tooth" onerror="this.src='https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=400&q=80'">
+                        <p>A shiny little pearl!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="milestone-card">
+                <div class="card-inner">
+                    <div class="card-front" style="background: var(--cream)">
+                        <h3>Favorite Toys 🧸</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="assets/waving_teddy.png" alt="Favorite Toys" onerror="this.src='https://images.unsplash.com/photo-1558066531-15822eb1d521?auto=format&fit=crop&w=400&q=80'">
+                        <p>Playtime adventures!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Precious Memories 📸</h2>
+
+        <div class="upload-container" style="text-align: center; margin-bottom: 2.5rem;">
+            <label for="image-uploader" class="cta-btn" style="cursor: pointer; padding: 12px 25px; font-size: 1.1rem;">
+                ➕ Add Your Own Photos
+            </label>
+            <input type="file" id="image-uploader" multiple accept="image/*" style="display: none;">
+        </div>
+
+        <div class="polaroid-gallery" id="polaroid-gallery">
+            <div class="polaroid">
+                <img src="assets/hero_baby.png" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=400&q=80'">
+                <div class="caption">Sweet Angel</div>
+            </div>
+            <div class="polaroid">
+                <img src="assets/first_smile.png" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80'">
+                <div class="caption">Little Princess</div>
+            </div>
+            <div class="polaroid">
+                <img src="assets/gallery_1.png" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80'">
+                <div class="caption">Starry Eyes</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wishes" id="wishes">
+        <h2 class="section-title">Wishes & Blessings 💌</h2>
+        <div class="glass-card quote-card">
+            <p class="quote">"A niece is a gift whose worth cannot be measured except by the heart."</p>
+            <span class="author">- Loving Masi</span>
+        </div>
+        <div class="glass-card quote-card">
+            <p class="quote">"You are the sprinkle of magic our family always needed. Happy 1st Birthday!"</p>
+        </div>
+    </section>
+
+    <section class="celebration" id="celebration">
+        <h2 class="section-title">Let's Celebrate! 🎂</h2>
+        <div class="cake-container">
+            <img src="assets/birthday_cake.png" alt="Birthday Cake" class="cake-img">
+            <div class="flame"></div>
+        </div>
+        <button id="confetti-btn" class="cta-btn" style="margin-top: 2rem;">Throw Confetti 🎉</button>
+    </section>
+
+    <footer class="footer">
+        <div class="stars-footer"></div>
+        <div class="moon">🌙</div>
+        <p class="final-blessing">
+            "May your life always shine with happiness, love, and endless smiles."
+        </p>
+        <p class="signature">With all my love forever,<br>Your Masi ❤️</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
