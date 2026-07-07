@@ -357,7 +357,7 @@ h1, h2, h3, .quote, .signature {
 
 .carousel-viewport {
     width: 100%;
-    height: 480px;
+    height: 580px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -399,7 +399,7 @@ h1, h2, h3, .quote, .signature {
     opacity: 0.6;
     visibility: visible;
     z-index: 3;
-    transform: translate(calc(-50% - 190px), -50%) scale(0.8) rotate(-7deg);
+    transform: translate(calc(-50% - 240px), -50%) scale(0.8) rotate(-7deg);
     cursor: pointer;
 }
 
@@ -407,7 +407,7 @@ h1, h2, h3, .quote, .signature {
     opacity: 0.6;
     visibility: visible;
     z-index: 3;
-    transform: translate(calc(-50% + 190px), -50%) scale(0.8) rotate(7deg);
+    transform: translate(calc(-50% + 240px), -50%) scale(0.8) rotate(7deg);
     cursor: pointer;
 }
 
@@ -416,13 +416,13 @@ h1, h2, h3, .quote, .signature {
     transform: none !important;
     box-shadow: 0 15px 35px rgba(0,0,0,0.18) !important;
     margin: 0;
-    width: 360px; /* Big premium sizing */
-    padding: 18px 18px 55px 18px;
+    width: 460px; /* Even bigger premium sizing */
+    padding: 20px 20px 60px 20px;
 }
 
 .carousel-slide .polaroid img {
     width: 100%;
-    height: 300px;
+    height: 380px;
     object-fit: cover;
 }
 
